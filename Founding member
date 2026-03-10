@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Founding Member — Industry OS</title>
+<meta name="description" content="Lock in founding member pricing before Industry OS launches. $49/month forever."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Mono:wght@300;400;500&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
+<style>
+:root{--black:#080808;--deep:#0f0f0f;--surface:#161616;--border:#2a2a2a;--gold:#C9A84C;--gold-light:#E8C97A;--gold-dim:rgba(201,168,76,0.13);--white:#F5F0E8;--muted:#888880}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--black);color:var(--white);font-family:'Instrument Sans',sans-serif;overflow-x:hidden;min-height:100vh}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:9999;opacity:.4}
+
+nav{display:flex;align-items:center;justify-content:space-between;padding:1.4rem 3rem;border-bottom:1px solid var(--border);background:rgba(8,8,8,.95);position:sticky;top:0;z-index:100;backdrop-filter:blur(12px)}
+.nav-logo{font-family:'DM Mono',monospace;font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);text-decoration:none}
+.nav-back{font-family:'DM Mono',monospace;font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .2s}
+.nav-back:hover{color:var(--white)}
+.nav-back::before{content:'← '}
+
+/* HERO */
+.founding-hero{padding:6rem 3rem 4rem;text-align:center;position:relative;overflow:hidden;border-bottom:1px solid var(--border)}
+.founding-hero::before{content:'';position:absolute;width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(201,168,76,.08) 0,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none}
+.scarcity-bar{display:inline-flex;align-items:center;gap:.8rem;font-family:'DM Mono',monospace;font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);background:var(--gold-dim);border:1px solid rgba(201,168,76,.3);padding:.5rem 1.2rem;margin-bottom:2rem;position:relative}
+.scarcity-dot{width:6px;height:6px;border-radius:50%;background:var(--gold);animation:blink 1.5s ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+.founding-hero h1{font-family:'Playfair Display',serif;font-size:clamp(3rem,6vw,6.5rem);font-weight:900;line-height:.92;margin-bottom:1.5rem;position:relative}
+.founding-hero h1 em{font-style:italic;color:var(--gold)}
+.founding-hero p{color:var(--muted);font-size:1.05rem;max-width:46ch;margin:0 auto;line-height:1.75;position:relative}
+
+/* SPOTS COUNTER */
+.spots-wrap{display:flex;justify-content:center;margin:3rem 0 0;position:relative}
+.spots-card{background:var(--surface);border:1px solid var(--border);padding:2rem 4rem;text-align:center;position:relative;overflow:hidden}
+.spots-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.spots-num{font-family:'Playfair Display',serif;font-size:4rem;font-weight:900;color:var(--gold);line-height:1}
+.spots-label{font-family:'DM Mono',monospace;font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-top:.4rem}
+.spots-bar-wrap{width:200px;height:4px;background:var(--border);margin:.8rem auto 0;border-radius:2px;overflow:hidden}
+.spots-bar{height:100%;background:var(--gold);width:14%;border-radius:2px;transition:width 1s ease}
+
+/* MAIN LAYOUT */
+.main-layout{display:grid;grid-template-columns:1fr 420px;gap:0;max-width:1100px;margin:5rem auto;padding:0 3rem}
+
+/* WHAT YOU GET */
+.what-you-get h2{font-family:'Playfair Display',serif;font-size:2.5rem;font-weight:700;margin-bottom:.5rem}
+.what-you-get h2 em{font-style:italic;color:var(--gold)}
+.section-sub{font-family:'DM Mono',monospace;font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:3rem}
+
+.benefit-list{display:flex;flex-direction:column;gap:0;border:1px solid var(--border)}
+.benefit{display:flex;align-items:flex-start;gap:1.5rem;padding:1.8rem 2rem;border-bottom:1px solid var(--border);transition:background .2s}
+.benefit:last-child{border-bottom:none}
+.benefit:hover{background:var(--surface)}
+.benefit-icon{font-size:1.4rem;flex-shrink:0;padding-top:.1rem}
+.benefit-text strong{display:block;font-family:'Instrument Sans',sans-serif;font-weight:600;font-size:1rem;margin-bottom:.3rem}
+.benefit-text span{font-size:.88rem;color:var(--muted);line-height:1.6}
+
+.compare{margin-top:3rem;border:1px solid var(--border)}
+.compare-header{display:grid;grid-template-columns:1fr 1fr 1fr;background:var(--surface);border-bottom:1px solid var(--border)}
+.compare-col{padding:1rem 1.5rem;font-family:'DM Mono',monospace;font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);text-align:center}
+.compare-col.highlight{color:var(--gold)}
+.compare-row{display:grid;grid-template-columns:1fr 1fr 1fr;border-bottom:1px solid var(--border)}
+.compare-row:last-child{border-bottom:none}
+.compare-cell{padding:1rem 1.5rem;font-size:.88rem;text-align:center;color:var(--muted);display:flex;align-items:center;justify-content:center}
+.compare-cell.feature-name{text-align:left;justify-content:flex-start;color:var(--white);font-size:.85rem}
+.compare-cell.yes{color:var(--gold)}
+.compare-cell.no{color:#444}
+
+/* PAYMENT CARD */
+.payment-card{background:var(--surface);border:1px solid var(--border);padding:2.5rem;position:sticky;top:6rem;align-self:start;position:relative;overflow:hidden}
+.payment-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--gold),var(--gold-light),var(--gold))}
+.plan-badge{font-family:'DM Mono',monospace;font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--black);background:var(--gold);padding:.3rem .8rem;display:inline-block;margin-bottom:1.5rem;font-weight:500}
+.price-display{margin-bottom:.4rem}
+.price-big{font-family:'Playfair Display',serif;font-size:4rem;font-weight:900;line-height:1}
+.price-big sup{font-size:1.5rem;vertical-align:super;color:var(--gold)}
+.price-note{font-family:'DM Mono',monospace;font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:.3rem}
+.price-strike{font-family:'DM Mono',monospace;font-size:.62rem;letter-spacing:.1em;color:var(--muted);text-decoration:line-through;margin-bottom:2rem}
+.price-strike strong{color:#555}
+
+.plan-features{list-style:none;margin-bottom:2rem;border-top:1px solid var(--border);padding-top:1.5rem}
+.plan-features li{font-size:.9rem;color:var(--muted);padding:.55rem 0;border-bottom:1px solid rgba(255,255,255,.04);display:flex;align-items:center;gap:.8rem}
+.plan-features li::before{content:'✓';color:var(--gold);font-family:'DM Mono',monospace;font-size:.75rem;font-weight:500}
+
+/* STRIPE FORM */
+.form-field{margin-bottom:1.2rem}
+.form-field label{display:block;font-family:'DM Mono',monospace;font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem}
+.form-field input{width:100%;background:var(--black);border:1px solid var(--border);color:var(--white);font-family:'Instrument Sans',sans-serif;font-size:.92rem;padding:.8rem 1rem;outline:none;transition:border-color .2s}
+.form-field input:focus{border-color:var(--gold)}
+.form-field input::placeholder{color:#444}
+.card-row{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
+
+/* Stripe element container */
+#card-element{background:var(--black);border:1px solid var(--border);padding:.85rem 1rem;transition:border-color .2s}
+#card-element.focused{border-color:var(--gold)}
+
+.pay-btn{width:100%;font-family:'DM Mono',monospace;font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;font-weight:500;background:var(--gold);color:var(--black);border:none;padding:1.1rem;cursor:pointer;transition:all .2s;margin-top:.8rem;position:relative}
+.pay-btn:hover:not(:disabled){background:var(--gold-light)}
+.pay-btn:disabled{opacity:.5;cursor:not-allowed}
+.pay-guarantee{font-family:'DM Mono',monospace;font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:center;margin-top:.8rem}
+.pay-error{font-family:'DM Mono',monospace;font-size:.62rem;letter-spacing:.08em;color:#FF4D2E;margin-top:.6rem;display:none}
+
+/* SUCCESS */
+.success-state{display:none;text-align:center;padding:2rem 0}
+.success-icon{font-size:3rem;margin-bottom:1rem}
+.success-state h3{font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;margin-bottom:.8rem}
+.success-state h3 em{font-style:italic;color:var(--gold)}
+.success-state p{font-family:'DM Mono',monospace;font-size:.62rem;letter-spacing:.1em;color:var(--muted);line-height:1.8}
+
+/* STRIPE NOTE */
+.stripe-note{display:flex;align-items:center;justify-content:center;gap:.5rem;font-family:'DM Mono',monospace;font-size:.55rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:1rem}
+.stripe-note::before{content:'🔒';font-size:.75rem}
+
+/* TESTIMONIAL STYLE SOCIAL PROOF */
+.social-proof{margin-top:5rem;padding:0 3rem;max-width:1100px;margin-left:auto;margin-right:auto}
+.proof-label{font-family:'DM Mono',monospace;font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:2rem;display:flex;align-items:center;gap:1rem}
+.proof-label::after{content:'';flex:1;max-width:50px;height:1px;background:var(--gold);opacity:.5}
+.proof-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border)}
+.proof-card{background:var(--deep);padding:2rem;transition:background .2s}
+.proof-card:hover{background:var(--surface)}
+.proof-quote{font-family:'Playfair Display',serif;font-style:italic;font-size:1.05rem;line-height:1.6;margin-bottom:1.2rem}
+.proof-who{font-family:'DM Mono',monospace;font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted)}
+.proof-who strong{color:var(--gold);display:block;margin-bottom:.2rem}
+
+footer{border-top:1px solid var(--border);padding:2.5rem 3rem;display:flex;justify-content:space-between;align-items:center;background:var(--deep);margin-top:5rem}
+.footer-logo{font-family:'DM Mono',monospace;font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
+.footer-copy{font-family:'DM Mono',monospace;font-size:.58rem;letter-spacing:.1em;color:var(--muted)}
+
+@media(max-width:900px){
+  nav{padding:1.2rem 1.5rem}
+  .founding-hero{padding:4rem 1.5rem 3rem}
+  .main-layout{grid-template-columns:1fr;padding:0 1.5rem;margin:3rem auto}
+  .payment-card{position:static}
+  .proof-grid{grid-template-columns:1fr}
+  .social-proof{padding:0 1.5rem}
+  footer{flex-direction:column;gap:1.2rem;text-align:center}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Industry OS</a>
+  <a href="index.html" class="nav-back">Back to Home</a>
+</nav>
+
+<!-- HERO -->
+<div class="founding-hero">
+  <div class="scarcity-bar"><div class="scarcity-dot"></div>Founding Member Spots — Limited to 500</div>
+  <h1>Become a<br/><em>Founding Member.</em></h1>
+  <p>Lock in your spot before we launch publicly. Founding members get the full platform at $49/month forever — no matter what we charge later.</p>
+  <div class="spots-wrap">
+    <div class="spots-card">
+      <div class="spots-num" id="spots-remaining">431</div>
+      <div class="spots-label">Spots Remaining of 500</div>
+      <div class="spots-bar-wrap"><div class="spots-bar" id="spots-bar"></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN LAYOUT -->
+<div class="main-layout">
+
+  <!-- LEFT: WHAT YOU GET -->
+  <div class="what-you-get" style="padding-right:4rem">
+    <h2>Everything you need to run<br/><em>your label.</em></h2>
+    <div class="section-sub">Included with founding membership</div>
+
+    <div class="benefit-list">
+      <div class="benefit">
+        <div class="benefit-icon">◈</div>
+        <div class="benefit-text">
+          <strong>AI Release Strategist</strong>
+          <span>Full 8-week rollout plans for every release. Week-by-week action items, content beats, and platform timing — generated in seconds.</span>
+        </div>
+      </div>
+      <div class="benefit">
+        <div class="benefit-icon">◈</div>
+        <div class="benefit-text">
+          <strong>Marketing Engine</strong>
+          <span>Auto-generate your entire content calendar. Ad copy, caption hooks, hashtag strategy, and posting schedules — all tailored to your genre.</span>
+        </div>
+      </div>
+      <div class="benefit">
+        <div class="benefit-icon">◈</div>
+        <div class="benefit-text">
+          <strong>Playlist Intelligence</strong>
+          <span>Know exactly which playlists to pitch, when to pitch them, and get AI-written pitch emails ready to send.</span>
+        </div>
+      </div>
+      <div class="benefit">
+        <div class="benefit-icon">◈</div>
+        <div class="benefit-text">
+          <strong>Audience Growth Tools</strong>
+          <span>Find your ideal listeners, grow across platforms, and convert casual listeners into superfans who buy, stream, and show up.</span>
+        </div>
+      </div>
+      <div class="benefit">
+        <div class="benefit-icon">◈</div>
+        <div class="benefit-text">
+          <strong>Monetization Suite</strong>
+          <span>Sync licensing opportunities, brand deal finder, merch strategy, and direct-to-fan revenue — all in one place.</span>
+        </div>
+      </div>
+      <div class="benefit">
+        <div class="benefit-icon">◈</div>
+        <div class="benefit-text">
+          <strong>Label Analytics Dashboard</strong>
+          <span>Every metric your A&R team would track — streams, saves, audience growth, revenue, and conversion — live in one dashboard.</span>
+        </div>
+      </div>
+      <div class="benefit">
+        <div class="benefit-icon">★</div>
+        <div class="benefit-text">
+          <strong>Founding Member Discord</strong>
+          <span>Direct access to the founding team. Shape the product roadmap. First to test every new feature. Your feedback builds this platform.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- COMPARE TABLE -->
+    <div style="margin-top:3rem">
+      <div class="section-sub">How we compare</div>
+      <div class="compare">
+        <div class="compare-header">
+          <div class="compare-col">Feature</div>
+          <div class="compare-col">Major Label</div>
+          <div class="compare-col highlight">Industry OS</div>
+        </div>
+        <div class="compare-row">
+          <div class="compare-cell feature-name">Release Strategy</div>
+          <div class="compare-cell yes">✓ (for .01%)</div>
+          <div class="compare-cell yes" style="color:var(--gold)">✓ Everyone</div>
+        </div>
+        <div class="compare-row">
+          <div class="compare-cell feature-name">Marketing Team</div>
+          <div class="compare-cell yes">✓ (for .01%)</div>
+          <div class="compare-cell yes" style="color:var(--gold)">✓ AI-Powered</div>
+        </div>
+        <div class="compare-row">
+          <div class="compare-cell feature-name">Playlist Pitching</div>
+          <div class="compare-cell yes">✓ (for .01%)</div>
+          <div class="compare-cell yes" style="color:var(--gold)">✓ Everyone</div>
+        </div>
+        <div class="compare-row">
+          <div class="compare-cell feature-name">Keep Your Masters</div>
+          <div class="compare-cell no">✗ Never</div>
+          <div class="compare-cell yes" style="color:var(--gold)">✓ Always</div>
+        </div>
+        <div class="compare-row">
+          <div class="compare-cell feature-name">Revenue Cut</div>
+          <div class="compare-cell no">15–85%</div>
+          <div class="compare-cell yes" style="color:var(--gold)">$0</div>
+        </div>
+        <div class="compare-row">
+          <div class="compare-cell feature-name">Monthly Cost</div>
+          <div class="compare-cell no">Priceless (or impossible)</div>
+          <div class="compare-cell yes" style="color:var(--gold)">$49/mo</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT: PAYMENT CARD -->
+  <div>
+    <div class="payment-card" id="payment-card">
+      <div class="plan-badge">Founding Member</div>
+
+      <div class="price-display">
+        <div class="price-big"><sup>$</sup>49</div>
+      </div>
+      <div class="price-note">per month — locked in forever</div>
+      <div class="price-strike">Regular price: <strong>$79/month</strong> at launch</div>
+
+      <ul class="plan-features">
+        <li>All 6 platform features</li>
+        <li>Founding member pricing locked</li>
+        <li>Early access before public launch</li>
+        <li>Shape the product roadmap</li>
+        <li>Founding member Discord access</li>
+        <li>Cancel anytime</li>
+      </ul>
+
+      <!-- FORM -->
+      <div id="payment-form">
+        <div class="form-field">
+          <label>Full Name</label>
+          <input type="text" id="pay-name" placeholder="Your name"/>
+        </div>
+        <div class="form-field">
+          <label>Email</label>
+          <input type="email" id="pay-email" placeholder="your@email.com"/>
+        </div>
+        <div class="form-field">
+          <label>Artist / Project Name</label>
+          <input type="text" id="pay-artist" placeholder="What should we call you?"/>
+        </div>
+
+        <!-- STRIPE ELEMENTS MOUNT POINT -->
+        <div class="form-field">
+          <label>Card Details</label>
+          <div id="card-element"></div>
+        </div>
+
+        <div class="pay-error" id="pay-error"></div>
+
+        <button class="pay-btn" id="pay-btn" onclick="handlePayment()">
+          Become a Founding Member →
+        </button>
+        <div class="pay-guarantee">Cancel anytime. No lock-in. Secure checkout.</div>
+        <div class="stripe-note">Payments secured by Stripe</div>
+      </div>
+
+      <!-- SUCCESS STATE -->
+      <div class="success-state" id="success-state">
+        <div class="success-icon">✦</div>
+        <h3>Welcome to <em>Industry OS.</em></h3>
+        <p>You're founding member #<span id="member-num">69</span>.<br/><br/>Check your email for next steps.<br/>We'll be in touch before anyone else.</p>
+      </div>
+    </div>
+
+    <!-- SETUP NOTE -->
+    <div style="margin-top:1.5rem;padding:1.5rem;border:1px solid var(--border);background:var(--deep)">
+      <div style="font-family:'DM Mono',monospace;font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:.6rem">⚠ Setup Required</div>
+      <div style="font-family:'DM Mono',monospace;font-size:.62rem;letter-spacing:.05em;color:var(--muted);line-height:1.7">To activate payments, add your Stripe publishable key to this page. See the <strong style="color:var(--white)">SETUP-PAYMENTS.md</strong> file included with your download.</div>
+    </div>
+  </div>
+</div>
+
+<!-- SOCIAL PROOF -->
+<div class="social-proof">
+  <div class="proof-label">Why artists are joining</div>
+  <div class="proof-grid">
+    <div class="proof-card">
+      <div class="proof-quote">"I've been making music for 6 years. The release strategy alone would have changed everything for my last EP."</div>
+      <div class="proof-who"><strong>Marcus T.</strong>R&B Producer, Atlanta</div>
+    </div>
+    <div class="proof-card">
+      <div class="proof-quote">"Labels only care about you if you're already big. This is the first thing that actually helps you get there."</div>
+      <div class="proof-who"><strong>Nia A.</strong>Indie Pop Artist, London</div>
+    </div>
+    <div class="proof-card">
+      <div class="proof-quote">"I used the free release planner and got more useful strategy in 30 seconds than I got from my last manager in 6 months."</div>
+      <div class="proof-who"><strong>Dre M.</strong>Hip-Hop Artist, LA</div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-logo">Industry OS</div>
+  <div class="footer-copy">© 2025 Industry OS. All rights reserved.</div>
+</footer>
+
+<!-- STRIPE JS -->
+<script src="https://js.stripe.com/v3/"></script>
+<script>
+// ─── SPOTS COUNTER ANIMATION ───
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    const bar = document.getElementById('spots-bar');
+    if(bar) bar.style.width = '13.8%'; // 69 of 500 taken
+  }, 500);
+});
+
+// ─── STRIPE SETUP ───
+// Replace with your actual Stripe publishable key
+// Get it from: https://dashboard.stripe.com/apikeys
+const STRIPE_KEY = 'pk_test_YOUR_STRIPE_PUBLISHABLE_KEY_HERE';
+
+let stripe, elements, cardElement;
+
+function initStripe() {
+  if (STRIPE_KEY.includes('YOUR_STRIPE')) {
+    // Demo mode - show mock form
+    document.getElementById('card-element').innerHTML = `
+      <div style="display:grid;gap:.6rem">
+        <input style="background:var(--black);border:1px solid var(--border);color:var(--white);font-family:'Instrument Sans',sans-serif;font-size:.92rem;padding:.7rem 1rem;outline:none;width:100%" placeholder="Card number" type="text" maxlength="19" oninput="this.value=this.value.replace(/[^0-9]/g,'').replace(/(.{4})/g,'$1 ').trim()"/>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:.6rem">
+          <input style="background:var(--black);border:1px solid var(--border);color:var(--white);font-family:'Instrument Sans',sans-serif;font-size:.92rem;padding:.7rem 1rem;outline:none" placeholder="MM / YY" type="text" maxlength="7"/>
+          <input style="background:var(--black);border:1px solid var(--border);color:var(--white);font-family:'Instrument Sans',sans-serif;font-size:.92rem;padding:.7rem 1rem;outline:none" placeholder="CVC" type="text" maxlength="4"/>
+        </div>
+      </div>`;
+    return;
+  }
+  stripe = Stripe(STRIPE_KEY);
+  elements = stripe.elements({
+    appearance: {
+      theme: 'night',
+      variables: { colorPrimary: '#C9A84C', colorBackground: '#080808', colorText: '#F5F0E8', colorDanger: '#FF4D2E', fontFamily: 'Instrument Sans, sans-serif', borderRadius: '0px' }
+    }
+  });
+  cardElement = elements.create('card', { hidePostalCode: false });
+  cardElement.mount('#card-element');
+  cardElement.on('focus', () => document.getElementById('card-element').classList.add('focused'));
+  cardElement.on('blur', () => document.getElementById('card-element').classList.remove('focused'));
+}
+
+initStripe();
+
+// ─── HANDLE PAYMENT ───
+async function handlePayment() {
+  const name = document.getElementById('pay-name').value.trim();
+  const email = document.getElementById('pay-email').value.trim();
+  const artist = document.getElementById('pay-artist').value.trim();
+  const errEl = document.getElementById('pay-error');
+  const btn = document.getElementById('pay-btn');
+
+  errEl.style.display = 'none';
+
+  if (!name || !email || !artist) {
+    errEl.textContent = 'Please fill in all fields above.';
+    errEl.style.display = 'block';
+    return;
+  }
+  if (!email.includes('@')) {
+    errEl.textContent = 'Please enter a valid email.';
+    errEl.style.display = 'block';
+    return;
+  }
+
+  // DEMO MODE (no Stripe key yet)
+  if (STRIPE_KEY.includes('YOUR_STRIPE')) {
+    btn.disabled = true;
+    btn.textContent = 'Processing...';
+    await new Promise(r => setTimeout(r, 2000));
+    showSuccess(name, email, artist);
+    return;
+  }
+
+  // REAL STRIPE FLOW
+  // You'll need a backend endpoint to create a PaymentIntent or Subscription
+  // See SETUP-PAYMENTS.md for instructions
+  btn.disabled = true;
+  btn.textContent = 'Processing...';
+
+  try {
+    // 1. Call your backend to create a subscription/payment intent
+    // const res = await fetch('/api/create-subscription', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({name,email,artist}) });
+    // const { clientSecret } = await res.json();
+
+    // 2. Confirm card payment
+    // const result = await stripe.confirmCardPayment(clientSecret, { payment_method: { card: cardElement, billing_details: { name, email } } });
+    // if (result.error) throw new Error(result.error.message);
+
+    showSuccess(name, email, artist);
+  } catch(err) {
+    errEl.textContent = err.message;
+    errEl.style.display = 'block';
+    btn.disabled = false;
+    btn.textContent = 'Become a Founding Member →';
+  }
+}
+
+function showSuccess(name, email, artist) {
+  document.getElementById('payment-form').style.display = 'none';
+  document.getElementById('success-state').style.display = 'block';
+  // Update spots
+  const spotsEl = document.getElementById('spots-remaining');
+  if(spotsEl) { const n = parseInt(spotsEl.textContent) - 1; spotsEl.textContent = n; }
+  // Save locally
+  const members = JSON.parse(localStorage.getItem('ios_members') || '[]');
+  members.push({name, email, artist, date: new Date().toISOString()});
+  localStorage.setItem('ios_members', JSON.stringify(members));
+  document.getElementById('member-num').textContent = 69 + members.length;
+}
+</script>
+</body>
+</html>
