@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Industry OS — Run Your Music Career Like a Record Label</title>
+<meta name="description" content="The AI-powered platform that gives independent artists everything a major label provides — without signing away your music."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Mono:wght@300;400;500&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --black:#080808; --deep:#0f0f0f; --surface:#161616; --border:#2a2a2a;
+  --gold:#C9A84C; --gold-light:#E8C97A; --gold-dim:rgba(201,168,76,0.13);
+  --white:#F5F0E8; --muted:#888880; --red:#FF4D2E;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--black);color:var(--white);font-family:'Instrument Sans',sans-serif;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:9999;opacity:.4}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1.4rem 3rem;background:rgba(8,8,8,.9);backdrop-filter:blur(14px);border-bottom:1px solid var(--border)}
+.nav-logo{font-family:'DM Mono',monospace;font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);font-weight:500}
+.nav-links{display:flex;gap:2.5rem;list-style:none}
+.nav-links a{font-family:'DM Mono',monospace;font-size:.68rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .2s}
+.nav-links a:hover{color:var(--white)}
+.nav-cta{font-family:'DM Mono',monospace;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;background:var(--gold);color:var(--black);border:none;padding:.65rem 1.4rem;cursor:pointer;font-weight:500;transition:background .2s,transform .15s}
+.nav-cta:hover{background:var(--gold-light);transform:translateY(-1px)}
+
+/* TICKER */
+.ticker-bar{background:var(--gold);padding:.55rem 0;overflow:hidden;margin-top:73px}
+.ticker-track{display:flex;width:max-content;animation:marquee 22s linear infinite}
+.ticker-item{font-family:'DM Mono',monospace;font-size:.63rem;letter-spacing:.2em;text-transform:uppercase;color:var(--black);font-weight:500;padding:0 2.2rem;white-space:nowrap}
+.ticker-item::after{content:'◆';margin-left:2.2rem;font-size:.38rem;vertical-align:middle}
+@keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:6rem 3rem 5rem;position:relative;overflow:hidden}
+.hero-bg-lines{position:absolute;inset:0;pointer-events:none;opacity:.06;background-image:repeating-linear-gradient(90deg,var(--gold) 0,var(--gold) 1px,transparent 1px,transparent 80px)}
+.hero-orb{position:absolute;width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(201,168,76,.1) 0,transparent 70%);top:50%;right:-150px;transform:translateY(-50%);pointer-events:none;animation:orbpulse 7s ease-in-out infinite}
+@keyframes orbpulse{0%,100%{opacity:1;transform:translateY(-50%) scale(1)}50%{opacity:.6;transform:translateY(-50%) scale(1.06)}}
+.hero-eyebrow{font-family:'DM Mono',monospace;font-size:.68rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:2rem;opacity:0;animation:fadeUp .8s .2s forwards;display:flex;align-items:center;gap:.8rem}
+.hero-eyebrow::before{content:'';display:inline-block;width:2rem;height:1px;background:var(--gold)}
+.hero-title{font-family:'Playfair Display',serif;font-size:clamp(3.8rem,8.5vw,9rem);font-weight:900;line-height:.92;letter-spacing:-.02em;max-width:14ch;margin-bottom:2rem;opacity:0;animation:fadeUp .9s .35s forwards}
+.hero-title em{font-style:italic;color:var(--gold)}
+.hero-sub{font-size:1.05rem;color:var(--muted);max-width:44ch;line-height:1.75;margin-bottom:3rem;opacity:0;animation:fadeUp .9s .5s forwards}
+
+/* WAITLIST FORM */
+.waitlist-box{background:var(--surface);border:1px solid var(--border);padding:2.5rem;max-width:540px;opacity:0;animation:fadeUp .9s .65s forwards;position:relative;overflow:hidden}
+.waitlist-box::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--gold),var(--gold-light),var(--gold))}
+.waitlist-label{font-family:'DM Mono',monospace;font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:1.2rem}
+.waitlist-count{font-family:'DM Mono',monospace;font-size:.62rem;letter-spacing:.12em;color:var(--muted);margin-bottom:1.5rem}
+.waitlist-count strong{color:var(--white)}
+.input-row{display:flex;gap:.75rem}
+.waitlist-input{flex:1;background:var(--black);border:1px solid var(--border);color:var(--white);font-family:'Instrument Sans',sans-serif;font-size:.95rem;padding:.9rem 1.2rem;outline:none;transition:border-color .2s}
+.waitlist-input::placeholder{color:var(--muted)}
+.waitlist-input:focus{border-color:var(--gold)}
+.waitlist-btn{font-family:'DM Mono',monospace;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;font-weight:500;background:var(--gold);color:var(--black);border:none;padding:.9rem 1.6rem;cursor:pointer;white-space:nowrap;transition:background .2s,transform .15s}
+.waitlist-btn:hover{background:var(--gold-light);transform:translateY(-1px)}
+.waitlist-fine{font-family:'DM Mono',monospace;font-size:.58rem;letter-spacing:.08em;color:var(--muted);margin-top:.9rem}
+.waitlist-success{display:none;text-align:center;padding:1.5rem 0}
+.waitlist-success h3{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:700;margin-bottom:.5rem}
+.waitlist-success p{font-family:'DM Mono',monospace;font-size:.65rem;letter-spacing:.1em;color:var(--muted)}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+
+/* MARQUEE STRIP */
+.strip{overflow:hidden;border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:1rem 0;background:var(--deep)}
+.strip-track{display:flex;width:max-content;animation:marquee 30s linear infinite}
+.strip-item{font-family:'DM Mono',monospace;font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);padding:0 2.5rem;white-space:nowrap}
+.strip-item span{color:var(--gold);margin-right:2.5rem}
+
+/* SECTION COMMON */
+.section{padding:7rem 3rem}
+.section-label{font-family:'DM Mono',monospace;font-size:.62rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:3.5rem;display:flex;align-items:center;gap:1rem}
+.section-label::after{content:'';flex:1;max-width:50px;height:1px;background:var(--gold);opacity:.5}
+
+/* PROBLEM */
+.problem-grid{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--border)}
+.problem-intro{padding:4rem;border-right:1px solid var(--border)}
+.problem-intro h2{font-family:'Playfair Display',serif;font-size:clamp(2.2rem,3.5vw,4rem);font-weight:700;line-height:1.05;margin-bottom:1.8rem}
+.problem-intro p{color:var(--muted);line-height:1.75;font-size:.97rem;max-width:36ch}
+.problem-stats{display:grid;grid-template-rows:1fr 1fr}
+.stat-cell{padding:3rem 4rem;border-bottom:1px solid var(--border);position:relative;overflow:hidden;transition:background .3s}
+.stat-cell:last-child{border-bottom:none}
+.stat-cell:hover{background:var(--gold-dim)}
+.stat-num{font-family:'Playfair Display',serif;font-size:4rem;font-weight:900;color:var(--gold);line-height:1;margin-bottom:.4rem}
+.stat-lbl{font-family:'DM Mono',monospace;font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted)}
+
+/* FEATURE LIST */
+.features-title{font-family:'Playfair Display',serif;font-size:clamp(2.8rem,5vw,6rem);font-weight:900;line-height:.95;margin-bottom:5rem;max-width:20ch}
+.features-title em{font-style:italic;color:var(--gold)}
+.feat-list{border-top:1px solid var(--border)}
+.feat-row{display:grid;grid-template-columns:3.5rem 1fr 1fr auto;align-items:center;gap:3rem;padding:2.2rem 0;border-bottom:1px solid var(--border);transition:background .2s}
+.feat-row:hover{background:rgba(255,255,255,.015)}
+.feat-num{font-family:'DM Mono',monospace;font-size:.62rem;letter-spacing:.2em;color:var(--muted)}
+.feat-name{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700}
+.feat-desc{color:var(--muted);font-size:.88rem;line-height:1.6}
+.feat-tag{font-family:'DM Mono',monospace;font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);background:var(--gold-dim);border:1px solid rgba(201,168,76,.25);padding:.28rem .65rem;white-space:nowrap}
+
+/* TOOL PROMO */
+.tool-promo{background:var(--surface);border:1px solid var(--border);padding:5rem;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;position:relative;overflow:hidden}
+.tool-promo::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.tool-promo h2{font-family:'Playfair Display',serif;font-size:clamp(2rem,3.5vw,3.5rem);font-weight:900;line-height:1.05;margin-bottom:1.5rem}
+.tool-promo h2 em{font-style:italic;color:var(--gold)}
+.tool-promo p{color:var(--muted);line-height:1.75;font-size:.97rem;margin-bottom:2rem}
+.tool-steps{display:flex;flex-direction:column;gap:1.5rem}
+.tool-step{display:flex;align-items:flex-start;gap:1.2rem;padding:1.5rem;border:1px solid var(--border);transition:border-color .3s}
+.tool-step:hover{border-color:var(--gold)}
+.step-num{font-family:'DM Mono',monospace;font-size:.65rem;letter-spacing:.15em;color:var(--gold);padding-top:.1rem;white-space:nowrap}
+.step-text strong{display:block;font-family:'Instrument Sans',sans-serif;font-weight:600;margin-bottom:.3rem;font-size:.95rem}
+.step-text span{font-size:.85rem;color:var(--muted)}
+.btn-primary{font-family:'DM Mono',monospace;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;font-weight:500;background:var(--gold);color:var(--black);border:none;padding:1rem 2.2rem;cursor:pointer;transition:background .2s,transform .15s,box-shadow .2s;display:inline-block;text-decoration:none}
+.btn-primary:hover{background:var(--gold-light);transform:translateY(-2px);box-shadow:0 8px 35px rgba(201,168,76,.28)}
+
+/* CTA */
+.cta-section{padding:9rem 3rem;text-align:center;position:relative;overflow:hidden}
+.cta-section::before{content:'';position:absolute;width:800px;height:800px;border-radius:50%;background:radial-gradient(circle,rgba(201,168,76,.07) 0,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none}
+.cta-section h2{font-family:'Playfair Display',serif;font-size:clamp(3rem,6vw,7rem);font-weight:900;line-height:.95;margin-bottom:1.8rem;position:relative}
+.cta-section h2 em{font-style:italic;color:var(--gold)}
+.cta-section p{color:var(--muted);font-size:1rem;max-width:40ch;margin:0 auto 3rem;line-height:1.7;position:relative}
+.cta-waitlist{max-width:480px;margin:0 auto;position:relative}
+.cta-waitlist .input-row{justify-content:center}
+
+/* FOOTER */
+footer{border-top:1px solid var(--border);padding:2.5rem 3rem;display:flex;justify-content:space-between;align-items:center;background:var(--deep)}
+.footer-logo{font-family:'DM Mono',monospace;font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
+.footer-copy{font-family:'DM Mono',monospace;font-size:.58rem;letter-spacing:.1em;color:var(--muted)}
+.footer-links{display:flex;gap:2rem;list-style:none}
+.footer-links a{font-family:'DM Mono',monospace;font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .2s}
+.footer-links a:hover{color:var(--white)}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* SOCIAL PROOF */
+.proof-bar{background:var(--deep);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:3rem;display:flex;justify-content:center;gap:6rem;flex-wrap:wrap}
+.proof-item{text-align:center}
+.proof-num{font-family:'Playfair Display',serif;font-size:2.5rem;font-weight:900;color:var(--gold);line-height:1}
+.proof-lbl{font-family:'DM Mono',monospace;font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-top:.4rem}
+
+@media(max-width:900px){
+  nav{padding:1.2rem 1.5rem}
+  .nav-links{display:none}
+  .hero,.section{padding:5rem 1.5rem}
+  .problem-grid{grid-template-columns:1fr}
+  .problem-intro{border-right:none;border-bottom:1px solid var(--border)}
+  .feat-row{grid-template-columns:3rem 1fr;grid-template-rows:auto auto}
+  .feat-desc,.feat-tag{grid-column:2}
+  .tool-promo{grid-template-columns:1fr;padding:3rem 1.5rem;gap:3rem}
+  .cta-section{padding:6rem 1.5rem}
+  footer{flex-direction:column;gap:1.5rem;text-align:center}
+  .proof-bar{gap:3rem}
+  .input-row{flex-direction:column}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Industry OS</div>
+  <ul class="nav-links">
+    <li><a href="#problem">The Problem</a></li>
+    <li><a href="#features">Features</a></li>
+    <li><a href="#tool">Free Tool</a></li>
+  </ul>
+  <button class="nav-cta" onclick="window.location.href='founding-member.html'">Become a Founding Member</button>
+</nav>
+
+<div class="ticker-bar">
+  <div class="ticker-track">
+    <span class="ticker-item">Release Strategy</span><span class="ticker-item">Fan Growth</span><span class="ticker-item">AI Marketing</span><span class="ticker-item">Revenue Splits</span><span class="ticker-item">Playlist Pitching</span><span class="ticker-item">Brand Deals</span><span class="ticker-item">Social Automation</span><span class="ticker-item">Analytics Dashboard</span><span class="ticker-item">Release Strategy</span><span class="ticker-item">Fan Growth</span><span class="ticker-item">AI Marketing</span><span class="ticker-item">Revenue Splits</span><span class="ticker-item">Playlist Pitching</span><span class="ticker-item">Brand Deals</span><span class="ticker-item">Social Automation</span><span class="ticker-item">Analytics Dashboard</span>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="main-waitlist">
+  <div class="hero-bg-lines"></div>
+  <div class="hero-orb"></div>
+  <div class="hero-eyebrow">The Future of Independent Music</div>
+  <h1 class="hero-title">Run Your Career Like a <em>Record Label.</em></h1>
+  <p class="hero-sub">You make the music. Industry OS handles everything else — marketing, strategy, audience growth, monetization, and release planning. Powered by AI.</p>
+
+  <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:2rem;opacity:0;animation:fadeUp .9s .65s forwards">
+    <button class="waitlist-btn" style="font-size:.78rem;padding:1.1rem 2rem" onclick="window.location.href='founding-member.html'">✦ &nbsp;Become a Founding Member — $49/mo</button>
+    <button class="waitlist-btn" style="background:none;border:1px solid var(--border);color:var(--muted);font-size:.78rem;padding:1.1rem 2rem" onclick="document.getElementById('waitlist-section').scrollIntoView({behavior:'smooth'})">Join Free Waitlist</button>
+  </div>
+
+  <div class="waitlist-box" id="waitlist-box" id="waitlist-section">
+    <div class="waitlist-label">✦ &nbsp;Join the Waitlist — Free Early Access</div>
+    <div class="waitlist-count" id="count-display">Or join the waitlist — be among the first <strong>500 artists</strong> to get early access.</div>
+    <div class="waitlist-form-inner">
+      <div class="input-row">
+        <input class="waitlist-input" type="email" id="hero-email" placeholder="your@email.com" autocomplete="email"/>
+        <button class="waitlist-btn" onclick="submitWaitlist('hero-email','waitlist-box')">Get Early Access →</button>
+      </div>
+      <div class="waitlist-fine">No credit card. No spam. Unsubscribe anytime.</div>
+    </div>
+    <div class="waitlist-success" id="waitlist-box-success">
+      <h3>You're on the list. ✦</h3>
+      <p>We'll reach out when early access opens. Watch your inbox.</p>
+    </div>
+  </div>
+</section>
+
+<!-- STRIP -->
+<div class="strip">
+  <div class="strip-track">
+    <div class="strip-item"><span>✦</span>Marketing Automation</div><div class="strip-item"><span>✦</span>Audience Growth Engine</div><div class="strip-item"><span>✦</span>AI Release Planner</div><div class="strip-item"><span>✦</span>Revenue Optimization</div><div class="strip-item"><span>✦</span>Brand Deal Finder</div><div class="strip-item"><span>✦</span>Sync Licensing Tools</div><div class="strip-item"><span>✦</span>Social Media Scheduling</div><div class="strip-item"><span>✦</span>Marketing Automation</div><div class="strip-item"><span>✦</span>Audience Growth Engine</div><div class="strip-item"><span>✦</span>AI Release Planner</div><div class="strip-item"><span>✦</span>Revenue Optimization</div>
+  </div>
+</div>
+
+<!-- PROOF BAR -->
+<div class="proof-bar reveal">
+  <div class="proof-item"><div class="proof-num">10M+</div><div class="proof-lbl">Independent Artists Worldwide</div></div>
+  <div class="proof-item"><div class="proof-num">&lt;1%</div><div class="proof-lbl">Get Signed to a Major Label</div></div>
+  <div class="proof-item"><div class="proof-num">$0</div><div class="proof-lbl">Label Support for Everyone Else</div></div>
+</div>
+
+<!-- PROBLEM -->
+<section class="section" id="problem">
+  <div class="section-label">The Problem</div>
+  <div class="problem-grid reveal">
+    <div class="problem-intro">
+      <h2>Most artists don't fail because of the music.</h2>
+      <p>They fail because they lack a team. Traditional labels provided marketing, strategy, and distribution — but they only sign a tiny fraction of artists. Everyone else is left to figure it out alone.</p>
+    </div>
+    <div class="problem-stats">
+      <div class="stat-cell"><div class="stat-num">&lt;1%</div><div class="stat-lbl">of artists get signed to a major label</div></div>
+      <div class="stat-cell"><div class="stat-num">93%</div><div class="stat-lbl">of independent artists never break through</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="section" id="features" style="background:var(--deep);border-top:1px solid var(--border)">
+  <div class="section-label">What's Inside</div>
+  <h2 class="features-title reveal">Your entire team, <em>in one platform.</em></h2>
+  <div class="feat-list">
+    <div class="feat-row reveal"><div class="feat-num">01</div><div class="feat-name">AI Release Strategist</div><div class="feat-desc">Plan your rollout with data-driven release windows, pre-save campaigns, and platform-optimized timing.</div><div class="feat-tag">Strategy</div></div>
+    <div class="feat-row reveal"><div class="feat-num">02</div><div class="feat-name">Marketing Engine</div><div class="feat-desc">Auto-generate content calendars, ad copy, and social campaigns tailored to your genre and audience.</div><div class="feat-tag">Marketing</div></div>
+    <div class="feat-row reveal"><div class="feat-num">03</div><div class="feat-name">Audience Growth</div><div class="feat-desc">Identify your ideal fans, grow your following across platforms, and convert listeners into superfans.</div><div class="feat-tag">Growth</div></div>
+    <div class="feat-row reveal"><div class="feat-num">04</div><div class="feat-name">Monetization Suite</div><div class="feat-desc">Unlock sync licensing, brand deals, merch, and direct-to-fan revenue — all in one place.</div><div class="feat-tag">Revenue</div></div>
+    <div class="feat-row reveal"><div class="feat-num">05</div><div class="feat-name">Playlist Intelligence</div><div class="feat-desc">Personalized Spotify and Apple Music pitching recommendations with AI-crafted outreach copy.</div><div class="feat-tag">Distribution</div></div>
+    <div class="feat-row reveal"><div class="feat-num">06</div><div class="feat-name">Label Analytics</div><div class="feat-desc">Real-time dashboard tracking every metric your label team would — streams, saves, conversions, revenue.</div><div class="feat-tag">Analytics</div></div>
+  </div>
+</section>
+
+<!-- TOOL PROMO -->
+<section class="section" id="tool">
+  <div class="section-label">Free Tool — Live Now</div>
+  <div class="tool-promo reveal">
+    <div>
+      <h2>Get your <em>AI Release Plan</em> free — right now.</h2>
+      <p>Before the full platform launches, we built one tool you can use today. Tell us about your upcoming release and get a personalized 8-week rollout strategy in seconds.</p>
+      <a href="release-planner.html" class="btn-primary">Try the Free Release Planner →</a>
+    </div>
+    <div class="tool-steps">
+      <div class="tool-step"><div class="step-num">STEP 01</div><div class="step-text"><strong>Tell us about your release</strong><span>Genre, vibe, release date, current following size</span></div></div>
+      <div class="tool-step"><div class="step-num">STEP 02</div><div class="step-text"><strong>AI builds your strategy</strong><span>Week-by-week rollout, content beats, pitch timing</span></div></div>
+      <div class="tool-step"><div class="step-num">STEP 03</div><div class="step-text"><strong>Download & execute</strong><span>Copy your plan, start executing, grow your fanbase</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <h2>Your career.<br/><em>Your label.</em></h2>
+  <p>Stop waiting for someone to believe in you. Build the career you deserve — starting today.</p>
+  <div class="cta-waitlist" id="cta-waitlist-box">
+    <div class="waitlist-label" style="text-align:center;margin-bottom:1rem">✦ &nbsp;Secure Your Spot</div>
+    <div class="input-row">
+      <input class="waitlist-input" type="email" id="cta-email" placeholder="your@email.com"/>
+      <button class="waitlist-btn" onclick="submitWaitlist('cta-email','cta-waitlist-box')">Join Waitlist →</button>
+    </div>
+    <div class="waitlist-fine" style="text-align:center;margin-top:.8rem">Free. No credit card. Founding member pricing locked in.</div>
+    <div class="waitlist-success" id="cta-waitlist-box-success">
+      <h3>You're in. ✦</h3>
+      <p>We'll be in touch. Get the free Release Planner while you wait.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">Industry OS</div>
+  <ul class="footer-links">
+    <li><a href="#features">Features</a></li>
+    <li><a href="release-planner.html">Free Tool</a></li>
+    <li><a href="mailto:hello@creatorlabelos.com">Contact</a></li>
+  </ul>
+  <div class="footer-copy">© 2025 Industry OS. All rights reserved.</div>
+</footer>
+
+<script>
+// Waitlist logic — stores to localStorage so count persists in session
+// In production, replace this with a real backend call (Mailchimp, ConvertKit, Supabase, etc.)
+function submitWaitlist(inputId, boxId) {
+  const input = document.getElementById(inputId);
+  const email = input.value.trim();
+  if (!email || !email.includes('@')) {
+    input.style.borderColor = '#FF4D2E';
+    input.focus();
+    setTimeout(() => input.style.borderColor = '', 1500);
+    return;
+  }
+
+  // Save email
+  const emails = JSON.parse(localStorage.getItem('cls_waitlist') || '[]');
+  if (!emails.includes(email)) { emails.push(email); localStorage.setItem('cls_waitlist', JSON.stringify(emails)); }
+
+  // Show success state
+  const box = document.getElementById(boxId);
+  const form = box.querySelector('.waitlist-form-inner') || box;
+  const success = document.getElementById(boxId + '-success');
+
+  // Hide form elements
+  box.querySelectorAll('.input-row, .waitlist-fine, .waitlist-label, .waitlist-count, #count-display').forEach(el => { if(el) el.style.display='none'; });
+  if(success) success.style.display='block';
+}
+
+// Scroll reveal
+const reveals = document.querySelectorAll('.reveal');
+const obs = new IntersectionObserver(entries => {
+  entries.forEach((e,i) => { if(e.isIntersecting){ setTimeout(()=>e.target.classList.add('visible'),i*80); obs.unobserve(e.target); }});
+}, {threshold:.08});
+reveals.forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
