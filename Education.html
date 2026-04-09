@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Industry OS — Education Layer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Mono:wght@300;400;500&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
+<style>
+:root{--black:#080808;--deep:#0f0f0f;--surface:#161616;--border:#2a2a2a;--gold:#C9A84C;--gold-light:#E8C97A;--gold-dim:rgba(201,168,76,0.13);--white:#F5F0E8;--muted:#888880}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--black);color:var(--white);font-family:'Instrument Sans',sans-serif;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:9999;opacity:.4}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:1.2rem 2rem;background:rgba(8,8,8,.95);backdrop-filter:blur(14px);border-bottom:1px solid var(–border)}
+.nav-logo{font-family:‘DM Mono’,monospace;font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(–gold);cursor:pointer;text-decoration:none}
+.nav-right{display:flex;align-items:center;gap:1.2rem}
+.nav-link{font-family:‘DM Mono’,monospace;font-size:.63rem;letter-spacing:.14em;text-transform:uppercase;color:var(–muted);cursor:pointer;background:none;border:none;transition:color .2s;text-decoration:none}
+.nav-link:hover{color:var(–white)}
+.nav-cta{font-family:‘DM Mono’,monospace;font-size:.63rem;letter-spacing:.12em;text-transform:uppercase;background:var(–gold);color:var(–black);border:none;padding:.6rem 1.2rem;cursor:pointer;font-weight:500;transition:background .2s;text-decoration:none}
+.nav-cta:hover{background:var(–gold-light)}
+
+/* TICKER */
+.ticker{background:var(–gold);padding:.5rem 0;overflow:hidden;margin-top:65px}
+.ticker-track{display:flex;width:max-content;animation:scroll 22s linear infinite}
+.ticker-item{font-family:‘DM Mono’,monospace;font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(–black);font-weight:500;padding:0 2rem;white-space:nowrap}
+.ticker-item::after{content:‘◆’;margin-left:2rem;font-size:.35rem;vertical-align:middle}
+@keyframes scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+
+/* HERO */
+.edu-hero{padding:6rem 2rem 5rem;max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 420px;gap:5rem;align-items:center;position:relative}
+.edu-hero::before{content:’’;position:absolute;top:0;right:0;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(201,168,76,.07) 0,transparent 65%);pointer-events:none}
+.hero-tag{display:inline-flex;align-items:center;gap:.7rem;font-family:‘DM Mono’,monospace;font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:var(–gold);margin-bottom:1.5rem;opacity:0;animation:fadeUp .7s .1s forwards}
+.hero-tag::before{content:’’;width:1.5rem;height:1px;background:var(–gold)}
+.edu-hero h1{font-family:‘Playfair Display’,serif;font-size:clamp(2.5rem,5vw,5rem);font-weight:900;line-height:.95;letter-spacing:-.02em;margin-bottom:1.5rem;opacity:0;animation:fadeUp .8s .25s forwards}
+.edu-hero h1 em{font-style:italic;color:var(–gold)}
+.hero-desc{font-size:.95rem;color:var(–muted);line-height:1.75;max-width:44ch;margin-bottom:2rem;opacity:0;animation:fadeUp .8s .4s forwards}
+.hero-meta{display:flex;gap:1.5rem;flex-wrap:wrap;margin-bottom:2.5rem;opacity:0;animation:fadeUp .8s .5s forwards}
+.meta-item{font-family:‘DM Mono’,monospace;font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:var(–muted);display:flex;align-items:center;gap:.5rem}
+.meta-item span{color:var(–gold)}
+.hero-btns{display:flex;gap:.8rem;flex-wrap:wrap;opacity:0;animation:fadeUp .8s .6s forwards}
+.btn-gold{font-family:‘DM Mono’,monospace;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;font-weight:500;background:var(–gold);color:var(–black);border:none;padding:1rem 2rem;cursor:pointer;transition:background .2s,transform .15s}
+.btn-gold:hover{background:var(–gold-light);transform:translateY(-1px)}
+.btn-out{font-family:‘DM Mono’,monospace;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;background:none;color:var(–muted);border:1px solid var(–border);padding:1rem 2rem;cursor:pointer;transition:all .2s}
+.btn-out:hover{border-color:var(–gold);color:var(–white)}
+
+/* BOOK MOCKUP */
+.book-wrap{opacity:0;animation:fadeUp .9s .4s forwards;position:relative}
+.book{width:100%;aspect-ratio:3/4;background:linear-gradient(145deg,#1a1408,#2a1f08);border:1px solid rgba(201,168,76,.3);position:relative;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.6),0 0 0 1px rgba(201,168,76,.1),-8px 8px 0 rgba(201,168,76,.08),-16px 16px 0 rgba(201,168,76,.04)}
+.book::before{content:’’;position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 40px,rgba(201,168,76,.03) 40px,rgba(201,168,76,.03) 41px)}
+.book-spine{position:absolute;left:0;top:0;bottom:0;width:16px;background:linear-gradient(90deg,#3a2a08,#2a1f08);border-right:1px solid rgba(201,168,76,.2)}
+.book-inner{padding:2.5rem 2rem 2rem 2.5rem;height:100%;display:flex;flex-direction:column}
+.book-series{font-family:‘DM Mono’,monospace;font-size:.55rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(201,168,76,.5);margin-bottom:1.5rem}
+.book-tri{margin-bottom:1.5rem}
+.book-title{font-family:‘Playfair Display’,serif;font-size:1.6rem;font-weight:900;line-height:1.1;color:var(–gold);margin-bottom:.5rem}
+.book-subtitle{font-family:‘DM Mono’,monospace;font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(201,168,76,.5);margin-bottom:1.5rem}
+.book-divider{width:100%;height:1px;background:linear-gradient(90deg,var(–gold),transparent);margin-bottom:1.5rem}
+.book-chapters{flex:1;display:flex;flex-direction:column;gap:.5rem}
+.book-ch{font-family:‘DM Mono’,monospace;font-size:.55rem;letter-spacing:.08em;color:rgba(245,240,232,.3);display:flex;align-items:center;gap:.6rem}
+.book-ch::before{content:’’;width:12px;height:1px;background:rgba(201,168,76,.3);flex-shrink:0}
+.book-author{margin-top:auto;padding-top:1rem;border-top:1px solid rgba(201,168,76,.15)}
+.book-author-name{font-family:‘Playfair Display’,serif;font-size:.85rem;font-style:italic;color:rgba(245,240,232,.5)}
+.book-author-brand{font-family:‘DM Mono’,monospace;font-size:.5rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(201,168,76,.3)}
+.book-badge{position:absolute;top:1.5rem;right:1.5rem;width:56px;height:56px;border-radius:50%;background:var(–gold);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0}
+.book-badge-price{font-family:‘DM Mono’,monospace;font-size:.65rem;font-weight:500;color:var(–black);line-height:1}
+.book-badge-label{font-family:‘DM Mono’,monospace;font-size:.4rem;letter-spacing:.1em;text-transform:uppercase;color:var(–black)}
+
+/* PRICING SPLIT */
+.pricing-split{padding:5rem 2rem;max-width:1100px;margin:0 auto}
+.split-label{font-family:‘DM Mono’,monospace;font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:var(–gold);margin-bottom:1.5rem;display:flex;align-items:center;gap:.8rem}
+.split-label::before{content:’’;width:1.5rem;height:1px;background:var(–gold)}
+.split-h{font-family:‘Playfair Display’,serif;font-size:clamp(1.8rem,4vw,3.5rem);font-weight:900;line-height:1.05;margin-bottom:3rem}
+.split-h em{font-style:italic;color:var(–gold)}
+.split-cards{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(–border)}
+.split-card{background:var(–black);padding:3rem;position:relative}
+.split-card.free{border-top:3px solid var(–gold)}
+.split-card.paid{border-top:3px solid var(–border)}
+.card-type{font-family:‘DM Mono’,monospace;font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;margin-bottom:1.5rem}
+.split-card.free .card-type{color:var(–gold)}
+.split-card.paid .card-type{color:var(–muted)}
+.card-price{font-family:‘Playfair Display’,serif;font-size:3.5rem;font-weight:900;line-height:1;margin-bottom:.4rem}
+.split-card.free .card-price{color:var(–gold)}
+.split-card.paid .card-price{color:var(–white)}
+.card-price sup{font-size:1.5rem;vertical-align:super}
+.card-period{font-family:‘DM Mono’,monospace;font-size:.58rem;letter-spacing:.1em;color:var(–muted);margin-bottom:2rem}
+.card-features{list-style:none;display:flex;flex-direction:column;gap:.9rem;margin-bottom:2.5rem}
+.card-feat{font-size:.88rem;color:var(–muted);display:flex;align-items:flex-start;gap:.7rem;line-height:1.5}
+.card-feat::before{content:’—’;color:var(–gold);font-family:‘DM Mono’,monospace;font-size:.7rem;flex-shrink:0;margin-top:.1rem}
+.split-card.free .card-feat{color:var(–white)}
+.card-btn{width:100%;font-family:‘DM Mono’,monospace;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;font-weight:500;border:none;padding:1rem;cursor:pointer;transition:all .2s}
+.split-card.free .card-btn{background:var(–gold);color:var(–black)}
+.split-card.free .card-btn:hover{background:var(–gold-light)}
+.split-card.paid .card-btn{background:var(–surface);color:var(–muted);border:1px solid var(–border)}
+.split-card.paid .card-btn:hover{border-color:var(–gold);color:var(–white)}
+
+/* CHAPTERS */
+.chapters-sec{padding:5rem 2rem;border-top:1px solid var(–border)}
+.chapters-inner{max-width:1100px;margin:0 auto}
+.ch-label{font-family:‘DM Mono’,monospace;font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:var(–gold);margin-bottom:1.5rem;display:flex;align-items:center;gap:.8rem}
+.ch-label::before{content:’’;width:1.5rem;height:1px;background:var(–gold)}
+.ch-h{font-family:‘Playfair Display’,serif;font-size:clamp(1.8rem,4vw,3rem);font-weight:900;line-height:1.05;margin-bottom:3rem}
+.ch-h em{font-style:italic;color:var(–gold)}
+.ch-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(–border)}
+.ch-card{background:var(–black);padding:2rem;transition:background .2s;position:relative;overflow:hidden}
+.ch-card:hover{background:var(–surface)}
+.ch-card::before{content:’’;position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,var(–gold),transparent);opacity:0;transition:opacity .2s}
+.ch-card:hover::before{opacity:1}
+.ch-num{font-family:‘DM Mono’,monospace;font-size:.55rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(201,168,76,.4);margin-bottom:1rem}
+.ch-name{font-family:‘Playfair Display’,serif;font-size:1.1rem;font-weight:700;margin-bottom:.8rem;line-height:1.2}
+.ch-topics{display:flex;flex-direction:column;gap:.4rem}
+.ch-topic{font-family:‘DM Mono’,monospace;font-size:.55rem;letter-spacing:.08em;color:var(–muted);display:flex;align-items:center;gap:.5rem}
+.ch-topic::before{content:’·’;color:var(–gold)}
+
+/* AUTHOR */
+.author-sec{padding:5rem 2rem;background:var(–deep);border-top:1px solid var(–border);border-bottom:1px solid var(–border)}
+.author-inner{max-width:800px;margin:0 auto;text-align:center}
+.author-mark{width:80px;height:80px;background:var(–gold-dim);border:1px solid rgba(201,168,76,.2);display:flex;align-items:center;justify-content:center;margin:0 auto 2rem;border-radius:50%}
+.author-label{font-family:‘DM Mono’,monospace;font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:var(–gold);margin-bottom:1rem}
+.author-name{font-family:‘Playfair Display’,serif;font-size:2.5rem;font-weight:900;font-style:italic;margin-bottom:.5rem}
+.author-brand{font-family:‘DM Mono’,monospace;font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(–muted);margin-bottom:1.5rem}
+.author-bio{font-size:.95rem;color:var(–muted);line-height:1.8;max-width:52ch;margin:0 auto 2rem}
+.author-tag{display:inline-flex;align-items:center;gap:.6rem;font-family:‘DM Mono’,monospace;font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:var(–gold);background:var(–gold-dim);border:1px solid rgba(201,168,76,.15);padding:.4rem 1rem}
+
+/* ECOSYSTEM BANNER */
+.ecosystem{padding:6rem 2rem;max-width:1100px;margin:0 auto;text-align:center}
+.eco-label{font-family:‘DM Mono’,monospace;font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:var(–gold);margin-bottom:1.5rem;display:flex;align-items:center;justify-content:center;gap:.8rem}
+.eco-label::before,.eco-label::after{content:’’;width:1.5rem;height:1px;background:var(–gold)}
+.eco-h{font-family:‘Playfair Display’,serif;font-size:clamp(2rem,5vw,4.5rem);font-weight:900;line-height:1;margin-bottom:1.5rem}
+.eco-h em{font-style:italic;color:var(–gold)}
+.eco-p{font-size:.95rem;color:var(–muted);line-height:1.75;max-width:46ch;margin:0 auto 3rem}
+.eco-layers{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(–border);margin-bottom:3rem}
+.eco-layer{background:var(–black);padding:2.5rem;text-align:left}
+.eco-layer-num{font-family:‘DM Mono’,monospace;font-size:.55rem;letter-spacing:.2em;color:rgba(201,168,76,.4);margin-bottom:1rem}
+.eco-layer-icon{font-size:1.5rem;margin-bottom:1rem}
+.eco-layer-name{font-family:‘Playfair Display’,serif;font-size:1.2rem;font-weight:700;color:var(–white);margin-bottom:.5rem}
+.eco-layer-desc{font-family:‘DM Mono’,monospace;font-size:.58rem;letter-spacing:.06em;color:var(–muted);line-height:1.6}
+.eco-layer.active{border-top:2px solid var(–gold)}
+.eco-layer.active .eco-layer-name{color:var(–gold)}
+.eco-cta{display:inline-flex;align-items:center;gap:1rem}
+
+/* MODAL */
+.modal-overlay{position:fixed;inset:0;background:rgba(8,8,8,.95);z-index:500;display:none;align-items:center;justify-content:center;padding:2rem}
+.modal-overlay.open{display:flex}
+.modal{background:var(–deep);border:1px solid var(–border);max-width:480px;width:100%;padding:3rem;position:relative}
+.modal::before{content:’’;position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(–gold),var(–gold-light),var(–gold))}
+.modal-close{position:absolute;top:1.2rem;right:1.2rem;font-family:‘DM Mono’,monospace;font-size:.6rem;letter-spacing:.1em;background:none;border:none;color:var(–muted);cursor:pointer;text-transform:uppercase}
+.modal-close:hover{color:var(–white)}
+.modal-label{font-family:‘DM Mono’,monospace;font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(–gold);margin-bottom:1.2rem}
+.modal-h{font-family:‘Playfair Display’,serif;font-size:2rem;font-weight:900;margin-bottom:.8rem}
+.modal-p{font-size:.88rem;color:var(–muted);line-height:1.7;margin-bottom:2rem}
+.modal-price{display:flex;align-items:baseline;gap:.5rem;margin-bottom:2rem;padding-bottom:1.5rem;border-bottom:1px solid var(–border)}
+.modal-amount{font-family:‘Playfair Display’,serif;font-size:3rem;font-weight:900;color:var(–gold)}
+.modal-amount sup{font-size:1.2rem;vertical-align:super}
+.modal-note{font-family:‘DM Mono’,monospace;font-size:.58rem;letter-spacing:.08em;color:var(–muted)}
+.modal-btn{width:100%;font-family:‘DM Mono’,monospace;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;font-weight:500;background:var(–gold);color:var(–black);border:none;padding:1rem;cursor:pointer;transition:background .2s;margin-bottom:.8rem}
+.modal-btn:hover{background:var(–gold-light)}
+.modal-fine{font-family:‘DM Mono’,monospace;font-size:.55rem;letter-spacing:.08em;text-transform:uppercase;color:var(–muted);text-align:center}
+
+/* FOUNDING MODAL */
+.founding-modal{background:var(–deep);border:1px solid var(–border);max-width:480px;width:100%;padding:3rem;position:relative}
+.founding-modal::before{content:’’;position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(–gold),var(–gold-light),var(–gold))}
+
+/* FOOTER */
+footer{border-top:1px solid var(–border);padding:2rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.foot-logo{font-family:‘DM Mono’,monospace;font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(–gold)}
+.foot-copy{font-family:‘DM Mono’,monospace;font-size:.55rem;letter-spacing:.1em;color:var(–muted)}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+@media(max-width:900px){
+.edu-hero{grid-template-columns:1fr;gap:3rem}
+.book-wrap{max-width:320px;margin:0 auto}
+.split-cards,.ch-grid,.eco-layers{grid-template-columns:1fr}
+nav{padding:.9rem 1.2rem}
+.nav-right .nav-link{display:none}
+}
+</style>
+
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="https://industryos.netlify.app">◈ Industry OS</a>
+  <div class="nav-right">
+    <a class="nav-link" href="https://industryos.netlify.app">Home</a>
+    <a class="nav-link" href="https://industryos.netlify.app">Free Planner</a>
+    <a class="nav-cta" href="https://buy.stripe.com/6oU3cv5pB3jG1qL16P5Ne00" target="_blank">Become a Founding Member →</a>
+  </div>
+</nav>
+
+<div class="ticker">
+  <div class="ticker-track">
+    <div class="ticker-item">Education Layer</div>
+    <div class="ticker-item">Music Theory</div>
+    <div class="ticker-item">Free for Founding Members</div>
+    <div class="ticker-item">By Elige Rash III</div>
+    <div class="ticker-item">Industry OS</div>
+    <div class="ticker-item">Education Layer</div>
+    <div class="ticker-item">Music Theory</div>
+    <div class="ticker-item">Free for Founding Members</div>
+    <div class="ticker-item">By Elige Rash III</div>
+    <div class="ticker-item">Industry OS</div>
+  </div>
+</div>
+
+<!-- HERO -->
+
+<div class="edu-hero">
+  <div>
+    <div class="hero-tag">Industry OS — Education Layer — Vol. 01</div>
+    <h1>The Complete<br/>Guide to <em>Music<br/>Theory.</em></h1>
+    <p class="hero-desc">From beginner to advanced. Everything a music school charges thousands to teach — written specifically for independent artists, producers, and creators who are ready to understand the music they're already making.</p>
+    <div class="hero-meta">
+      <div class="meta-item"><span>8</span> Chapters</div>
+      <div class="meta-item"><span>Beginner</span> to Advanced</div>
+      <div class="meta-item"><span>PDF</span> Instant Download</div>
+      <div class="meta-item"><span>Free</span> for Founding Members</div>
+    </div>
+    <div class="hero-btns">
+      <button class="btn-gold" onclick="openModal('founding')">Get It Free — Join Founding Members →</button>
+      <button class="btn-out" onclick="openModal('buy')">Buy for $75</button>
+    </div>
+  </div>
+  <div class="book-wrap">
+    <div class="book">
+      <div class="book-spine"></div>
+      <div class="book-inner">
+        <div class="book-series">Industry OS · Education Layer · Vol. 01</div>
+        <div class="book-tri">
+          <svg width="32" height="28" viewBox="0 0 32 28" fill="none">
+            <polygon points="16,2 30,26 2,26" fill="none" stroke="#C9A84C" stroke-width="1.5"/>
+            <polygon points="16,8 26,24 6,24" fill="#C9A84C" opacity=".15"/>
+            <polygon points="16,10 24,23 8,23" fill="#C9A84C"/>
+            <polygon points="16,15 22,22 10,22" fill="#1a1408"/>
+          </svg>
+        </div>
+        <div class="book-title">The Complete Guide to Music Theory</div>
+        <div class="book-subtitle">From Beginner to Advanced</div>
+        <div class="book-divider"></div>
+        <div class="book-chapters">
+          <div class="book-ch">Notes &amp; the Staff</div>
+          <div class="book-ch">Rhythm &amp; Time</div>
+          <div class="book-ch">Scales &amp; Keys</div>
+          <div class="book-ch">Intervals</div>
+          <div class="book-ch">Chords &amp; Harmony</div>
+          <div class="book-ch">Chord Progressions</div>
+          <div class="book-ch">Dynamics &amp; Expression</div>
+          <div class="book-ch">Form &amp; Composition</div>
+        </div>
+        <div class="book-author">
+          <div class="book-author-name">Elige Rash III</div>
+          <div class="book-author-brand">Yours Truly Too Gifted</div>
+        </div>
+      </div>
+      <div class="book-badge">
+        <div class="book-badge-price">$75</div>
+        <div class="book-badge-label">or free</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PRICING SPLIT -->
+
+<div class="pricing-split">
+  <div class="split-label">Get Your Copy</div>
+  <h2 class="split-h">Two ways to get<br/><em>this resource.</em></h2>
+  <div class="split-cards reveal">
+    <div class="split-card free">
+      <div class="card-type">Founding Member — Best Value</div>
+      <div class="card-price"><sup>$</sup>49</div>
+      <div class="card-period">per month · locked forever · cancel anytime</div>
+      <ul class="card-features">
+        <li class="card-feat">This ebook — free immediately</li>
+        <li class="card-feat">Full Industry OS platform access</li>
+        <li class="card-feat">AI Release Planner — unlimited</li>
+        <li class="card-feat">Every new resource as it drops</li>
+        <li class="card-feat">Direct access to the founder personally</li>
+        <li class="card-feat">Shape what gets built next</li>
+        <li class="card-feat">Price locked forever — never goes up</li>
+      </ul>
+      <button class="card-btn" onclick="openModal('founding')">Become a Founding Member →</button>
+    </div>
+    <div class="split-card paid">
+      <div class="card-type">Ebook Only</div>
+      <div class="card-price"><sup>$</sup>75</div>
+      <div class="card-period">one time · instant PDF download</div>
+      <ul class="card-features">
+        <li class="card-feat">The Complete Guide to Music Theory PDF</li>
+        <li class="card-feat">8 chapters — beginner to advanced</li>
+        <li class="card-feat">Practice worksheets included</li>
+        <li class="card-feat">Quick reference charts</li>
+      </ul>
+      <button class="card-btn" onclick="openModal('buy')">Buy for $75 →</button>
+    </div>
+  </div>
+</div>
+
+<!-- CHAPTERS -->
+
+<div class="chapters-sec">
+  <div class="chapters-inner">
+    <div class="ch-label">What's Inside</div>
+    <h2 class="ch-h">8 chapters.<br/><em>Everything you need.</em></h2>
+    <div class="ch-grid reveal">
+      <div class="ch-card">
+        <div class="ch-num">Chapter 01</div>
+        <div class="ch-name">Notes & the Staff</div>
+        <div class="ch-topics">
+          <div class="ch-topic">The musical alphabet</div>
+          <div class="ch-topic">Sharps and flats</div>
+          <div class="ch-topic">Reading the staff</div>
+          <div class="ch-topic">Treble and bass clefs</div>
+        </div>
+      </div>
+      <div class="ch-card">
+        <div class="ch-num">Chapter 02</div>
+        <div class="ch-name">Rhythm & Time</div>
+        <div class="ch-topics">
+          <div class="ch-topic">Note values and rests</div>
+          <div class="ch-topic">Time signatures</div>
+          <div class="ch-topic">Dotted notes and ties</div>
+          <div class="ch-topic">Syncopation and groove</div>
+        </div>
+      </div>
+      <div class="ch-card">
+        <div class="ch-num">Chapter 03</div>
+        <div class="ch-name">Scales & Keys</div>
+        <div class="ch-topics">
+          <div class="ch-topic">Major and minor scales</div>
+          <div class="ch-topic">The Circle of Fifths</div>
+          <div class="ch-topic">Modes</div>
+          <div class="ch-topic">Relative keys</div>
+        </div>
+      </div>
+      <div class="ch-card">
+        <div class="ch-num">Chapter 04</div>
+        <div class="ch-name">Intervals</div>
+        <div class="ch-topics">
+          <div class="ch-topic">Naming intervals</div>
+          <div class="ch-topic">Perfect, major, minor</div>
+          <div class="ch-topic">Diminished and augmented</div>
+          <div class="ch-topic">Consonance and dissonance</div>
+        </div>
+      </div>
+      <div class="ch-card">
+        <div class="ch-num">Chapter 05</div>
+        <div class="ch-name">Chords & Harmony</div>
+        <div class="ch-topics">
+          <div class="ch-topic">Triads — all four types</div>
+          <div class="ch-topic">Seventh chords</div>
+          <div class="ch-topic">Chord inversions</div>
+          <div class="ch-topic">Extended chords 9ths–13ths</div>
+        </div>
+      </div>
+      <div class="ch-card">
+        <div class="ch-num">Chapter 06</div>
+        <div class="ch-name">Chord Progressions</div>
+        <div class="ch-topics">
+          <div class="ch-topic">Roman numeral analysis</div>
+          <div class="ch-topic">The most common progressions</div>
+          <div class="ch-topic">Cadences</div>
+          <div class="ch-topic">Secondary dominants</div>
+        </div>
+      </div>
+      <div class="ch-card">
+        <div class="ch-num">Chapter 07</div>
+        <div class="ch-name">Dynamics & Expression</div>
+        <div class="ch-topics">
+          <div class="ch-topic">Dynamic markings</div>
+          <div class="ch-topic">Articulation</div>
+          <div class="ch-topic">Tempo markings</div>
+          <div class="ch-topic">Crescendo and decrescendo</div>
+        </div>
+      </div>
+      <div class="ch-card">
+        <div class="ch-num">Chapter 08</div>
+        <div class="ch-name">Form & Composition</div>
+        <div class="ch-topics">
+          <div class="ch-topic">Binary, ternary, rondo forms</div>
+          <div class="ch-topic">Verse-chorus structure</div>
+          <div class="ch-topic">Motifs and phrases</div>
+          <div class="ch-topic">Writing your own music</div>
+        </div>
+      </div>
+      <div class="ch-card">
+        <div class="ch-num">Appendix</div>
+        <div class="ch-name">Practice Worksheets</div>
+        <div class="ch-topics">
+          <div class="ch-topic">Major scale practice sheets</div>
+          <div class="ch-topic">Chord building worksheet</div>
+          <div class="ch-topic">Interval identification</div>
+          <div class="ch-topic">Full quick reference charts</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- AUTHOR -->
+
+<div class="author-sec">
+  <div class="author-inner">
+    <div class="author-mark">
+      <svg width="32" height="28" viewBox="0 0 32 28" fill="none">
+        <polygon points="16,2 30,26 2,26" fill="none" stroke="#C9A84C" stroke-width="1.5"/>
+        <polygon points="16,9 25,24 7,24" fill="#C9A84C"/>
+        <polygon points="16,14 23,23 9,23" fill="#1a1408"/>
+      </svg>
+    </div>
+    <div class="author-label">About the Author</div>
+    <div class="author-name">Elige Rash III</div>
+    <div class="author-brand">Yours Truly Too Gifted · Founder, Industry OS</div>
+    <p class="author-bio">Musician, educator, actor, and the creative force building Industry OS — the operating system for independent artists. With a deep passion for making music theory and industry knowledge accessible to everyone, Elige has dedicated himself to breaking down complex concepts into clear, practical knowledge that artists can immediately apply to their careers.</p>
+    <div class="author-tag">◈ &nbsp; Founder & CEO — Industry OS</div>
+  </div>
+</div>
+
+<!-- ECOSYSTEM -->
+
+<div class="ecosystem">
+  <div class="eco-label">The Bigger Picture</div>
+  <h2 class="eco-h">This is just<br/><em>the beginning.</em></h2>
+  <p class="eco-p">Industry OS is being built to become the Duolingo of the music industry. This ebook is the first resource in a growing education layer that covers everything independent artists need to know.</p>
+  <div class="eco-layers reveal">
+    <div class="eco-layer active">
+      <div class="eco-layer-num">Layer 01 — Live Now</div>
+      <div class="eco-layer-icon">📚</div>
+      <div class="eco-layer-name">Education</div>
+      <div class="eco-layer-desc">Music theory, industry knowledge, contracts, royalties, publishing, distribution — everything labels teach their artists.</div>
+    </div>
+    <div class="eco-layer">
+      <div class="eco-layer-num">Layer 02 — Coming Soon</div>
+      <div class="eco-layer-icon">🤝</div>
+      <div class="eco-layer-name">Community</div>
+      <div class="eco-layer-desc">Artists, producers, engineers, managers, and curators — all in one place. The network that used to require a label deal.</div>
+    </div>
+    <div class="eco-layer">
+      <div class="eco-layer-num">Layer 03 — In Development</div>
+      <div class="eco-layer-icon">🚀</div>
+      <div class="eco-layer-name">Career Tools</div>
+      <div class="eco-layer-desc">Release strategy, marketing automation, playlist pitching, monetization, analytics — the full career command centre.</div>
+    </div>
+  </div>
+  <div class="eco-cta">
+    <button class="btn-gold" onclick="openModal('founding')">Join Founding Members — $49/mo →</button>
+  </div>
+</div>
+
+<footer>
+  <div class="foot-logo">◈ Industry OS</div>
+  <div class="foot-copy">© 2025 Industry OS · Built for Independent Artists · By Elige Rash III</div>
+</footer>
+
+<!-- BUY MODAL -->
+
+<div class="modal-overlay" id="modal-buy" onclick="closeModal(event,'buy')">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModalDirect('buy')">✕ Close</button>
+    <div class="modal-label">Ebook Purchase</div>
+    <h3 class="modal-h">The Complete Guide to Music Theory</h3>
+    <p class="modal-p">Instant PDF download. 8 chapters from beginner to advanced. Practice worksheets and quick reference charts included.</p>
+    <div class="modal-price">
+      <div class="modal-amount"><sup>$</sup>75</div>
+      <div class="modal-note">One time · Instant PDF download</div>
+    </div>
+    <button class="modal-btn" onclick="buyEbook()">Buy Now — $75 →</button>
+    <div class="modal-fine">Or get it free when you join as a founding member</div>
+  </div>
+</div>
+
+<!-- FOUNDING MODAL -->
+
+<div class="modal-overlay" id="modal-founding" onclick="closeModal(event,'founding')">
+  <div class="founding-modal">
+    <button class="modal-close" onclick="closeModalDirect('founding')">✕ Close</button>
+    <div class="modal-label">Founding Member — Best Value</div>
+    <h3 class="modal-h">Get everything.<br/>Including this ebook — free.</h3>
+    <p class="modal-p">Join as a founding member and get the Music Theory Ebook instantly — plus full Industry OS platform access, every future resource as it drops, and your price locked at $49/month forever.</p>
+    <div class="modal-price">
+      <div class="modal-amount"><sup>$</sup>49</div>
+      <div class="modal-note">Per month · Locked forever · Cancel anytime</div>
+    </div>
+    <button class="modal-btn" onclick="window.open('https://buy.stripe.com/6oU3cv5pB3jG1qL16P5Ne00','_blank')">Become a Founding Member →</button>
+    <div class="modal-fine">100 spots only · Price goes up at public launch</div>
+  </div>
+</div>
+
+<script>
+function openModal(type){
+  document.getElementById('modal-'+type).classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeModalDirect(type){
+  document.getElementById('modal-'+type).classList.remove('open');
+  document.body.style.overflow='';
+}
+function closeModal(e,type){
+  if(e.target===document.getElementById('modal-'+type)) closeModalDirect(type);
+}
+function buyEbook(){
+  // Replace with your Stripe payment link for the $75 ebook
+  window.open('https://buy.stripe.com/00w28raJVg6s9Xh4j15Ne01','_blank');
+}
+
+const obs=new IntersectionObserver(entries=>entries.forEach((e,i)=>{
+  if(e.isIntersecting){setTimeout(()=>e.target.classList.add('visible'),i*80);obs.unobserve(e.target);}
+}),{threshold:.08});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+
+</body>
+</html>
