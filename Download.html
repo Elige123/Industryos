@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Industry OS — Download Your Ebook</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Mono:wght@300;400;500&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
+<style>
+:root{--black:#080808;--deep:#0f0f0f;--surface:#161616;--border:#2a2a2a;--gold:#C9A84C;--gold-light:#E8C97A;--gold-dim:rgba(201,168,76,0.13);--white:#F5F0E8;--muted:#888880;--green:#2D9B5A;--green-bg:rgba(45,155,90,.1)}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--black);color:var(--white);font-family:'Instrument Sans',sans-serif;overflow-x:hidden;min-height:100vh;display:flex;flex-direction:column}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:9999;opacity:.4}
+
+/* NAV */
+nav{display:flex;align-items:center;justify-content:space-between;padding:1.2rem 2rem;border-bottom:1px solid var(–border)}
+.nav-logo{font-family:‘DM Mono’,monospace;font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(–gold);text-decoration:none}
+
+/* MAIN */
+main{flex:1;display:flex;align-items:center;justify-content:center;padding:3rem 2rem}
+.container{max-width:580px;width:100%;text-align:center}
+
+/* SUCCESS BADGE */
+.success-badge{
+display:inline-flex;align-items:center;gap:.7rem;
+font-family:‘DM Mono’,monospace;font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;
+color:var(–green);background:var(–green-bg);
+border:1px solid rgba(45,155,90,.2);
+padding:.5rem 1.2rem;margin-bottom:2rem;
+}
+.success-dot{width:6px;height:6px;border-radius:50%;background:var(–green);animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.8)}}
+
+/* TRIANGLE */
+.tri-wrap{margin-bottom:2rem}
+
+/* HEADING */
+.page-h{font-family:‘Playfair Display’,serif;font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.05;margin-bottom:1rem}
+.page-h em{font-style:italic;color:var(–gold)}
+.page-p{font-size:.95rem;color:var(–muted);line-height:1.75;max-width:42ch;margin:0 auto 2.5rem}
+
+/* DOWNLOAD CARD */
+.download-card{
+background:var(–surface);
+border:1px solid var(–border);
+padding:2.5rem;
+margin-bottom:1.5rem;
+position:relative;
+overflow:hidden;
+text-align:left;
+}
+.download-card::before{content:’’;position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(–gold),var(–gold-light),var(–gold))}
+.card-label{font-family:‘DM Mono’,monospace;font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(–gold);margin-bottom:1.2rem}
+.card-title{font-family:‘Playfair Display’,serif;font-size:1.4rem;font-weight:700;margin-bottom:.4rem}
+.card-sub{font-family:‘DM Mono’,monospace;font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:var(–muted);margin-bottom:1.5rem}
+.card-details{display:flex;gap:1.5rem;flex-wrap:wrap;margin-bottom:2rem;padding-bottom:1.5rem;border-bottom:1px solid var(–border)}
+.detail{font-family:‘DM Mono’,monospace;font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:var(–muted);display:flex;align-items:center;gap:.5rem}
+.detail span{color:var(–gold)}
+
+/* DOWNLOAD BUTTON */
+.download-btn{
+display:flex;align-items:center;justify-content:center;gap:.8rem;
+width:100%;
+font-family:‘DM Mono’,monospace;font-size:.75rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;
+background:var(–gold);color:var(–black);
+border:none;padding:1.1rem 2rem;cursor:pointer;
+transition:background .2s,transform .15s;
+text-decoration:none;
+}
+.download-btn:hover{background:var(–gold-light);transform:translateY(-1px)}
+.download-icon{font-size:1rem}
+
+/* NEXT STEPS */
+.next-card{
+background:var(–deep);
+border:1px solid var(–border);
+padding:2rem;
+text-align:left;
+margin-bottom:1.5rem;
+}
+.next-label{font-family:‘DM Mono’,monospace;font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(–muted);margin-bottom:1.2rem}
+.next-item{display:flex;gap:1rem;padding:.8rem 0;border-bottom:1px solid var(–border);align-items:flex-start}
+.next-item:last-child{border-bottom:none;padding-bottom:0}
+.next-num{font-family:‘DM Mono’,monospace;font-size:.6rem;letter-spacing:.1em;color:var(–gold);flex-shrink:0;margin-top:.1rem}
+.next-text{font-size:.88rem;color:var(–muted);line-height:1.6}
+.next-text strong{color:var(–white);font-weight:600}
+
+/* FOUNDING MEMBER CTA */
+.founding-cta{
+background:var(–gold-dim);
+border:1px solid rgba(201,168,76,.2);
+padding:2rem;
+text-align:center;
+}
+.fc-label{font-family:‘DM Mono’,monospace;font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(–gold);margin-bottom:.8rem}
+.fc-h{font-family:‘Playfair Display’,serif;font-size:1.3rem;font-weight:700;margin-bottom:.5rem}
+.fc-p{font-size:.85rem;color:var(–muted);margin-bottom:1.2rem;line-height:1.6}
+.fc-btn{
+font-family:‘DM Mono’,monospace;font-size:.65rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;
+background:var(–gold);color:var(–black);border:none;padding:.8rem 1.8rem;cursor:pointer;transition:background .2s;
+text-decoration:none;display:inline-block;
+}
+.fc-btn:hover{background:var(–gold-light)}
+
+/* FOOTER */
+footer{border-top:1px solid var(–border);padding:1.5rem 2rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.foot-logo{font-family:‘DM Mono’,monospace;font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(–gold)}
+.foot-copy{font-family:‘DM Mono’,monospace;font-size:.55rem;letter-spacing:.1em;color:var(–muted)}
+
+/* Animate in */
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.container>*{opacity:0;animation:fadeUp .6s forwards}
+.success-badge{animation-delay:.1s}
+.tri-wrap{animation-delay:.2s}
+.page-h{animation-delay:.3s}
+.page-p{animation-delay:.4s}
+.download-card{animation-delay:.5s}
+.next-card{animation-delay:.6s}
+.founding-cta{animation-delay:.7s}
+</style>
+
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="https://industryos.netlify.app">◈ Industry OS</a>
+  <span style="font-family:'DM Mono',monospace;font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted)">Education Layer</span>
+</nav>
+
+<main>
+  <div class="container">
+
+```
+<div class="success-badge">
+  <div class="success-dot"></div>
+  Payment Confirmed — Thank You
+</div>
+
+<div class="tri-wrap">
+  <svg width="60" height="54" viewBox="0 0 60 54" fill="none">
+    <polygon points="30,3 57,51 3,51" fill="none" stroke="#C9A84C" stroke-width="1.5" stroke-linejoin="round"/>
+    <polygon points="30,12 50,48 10,48" fill="#C9A84C" opacity=".1"/>
+    <polygon points="30,16 47,47 13,47" fill="#C9A84C"/>
+    <polygon points="30,28 42,44 18,44" fill="#080808"/>
+    <circle cx="30" cy="40" r="3.5" fill="#C9A84C"/>
+  </svg>
+</div>
+
+<h1 class="page-h">Your ebook is<br/><em>ready to download.</em></h1>
+<p class="page-p">Thank you for your purchase. Click below to access your complete music theory guide instantly.</p>
+
+<!-- DOWNLOAD CARD -->
+<div class="download-card">
+  <div class="card-label">Your Purchase — Vol. 01</div>
+  <div class="card-title">The Complete Guide to Music Theory</div>
+  <div class="card-sub">By Elige Rash III · Yours Truly Too Gifted</div>
+  <div class="card-details">
+    <div class="detail"><span>8</span> Chapters</div>
+    <div class="detail"><span>Beginner</span> to Advanced</div>
+    <div class="detail"><span>PDF</span> Format</div>
+    <div class="detail"><span>Instant</span> Access</div>
+  </div>
+  <a class="download-btn" href="https://drive.google.com/file/d/1Vu7Q4WUjzI_Z8OfKWwuh4MjTM4Y9GHD0/view?usp=drive_link" target="_blank">
+    <span class="download-icon">↓</span>
+    Download Your Ebook Now
+  </a>
+</div>
+
+<!-- NEXT STEPS -->
+<div class="next-card">
+  <div class="next-label">Getting the Most Out of This Guide</div>
+  <div class="next-item">
+    <div class="next-num">01</div>
+    <div class="next-text"><strong>Start with Chapter 1</strong> even if you have some experience. The foundation chapters are short and will fill in any gaps before the advanced material.</div>
+  </div>
+  <div class="next-item">
+    <div class="next-num">02</div>
+    <div class="next-text"><strong>Do the practice worksheets</strong> at the end. Reading theory without applying it is like watching someone else work out. The worksheets are where the learning actually sticks.</div>
+  </div>
+  <div class="next-item">
+    <div class="next-num">03</div>
+    <div class="next-text"><strong>Apply it to music you already love.</strong> Take a song you know and identify the chords, the key, the progression. Theory comes alive when it explains music you already feel.</div>
+  </div>
+  <div class="next-item">
+    <div class="next-num">04</div>
+    <div class="next-text"><strong>Bookmark this page.</strong> Your download link lives here and is available any time you need to re-access the PDF.</div>
+  </div>
+</div>
+
+<!-- FOUNDING MEMBER CTA -->
+<div class="founding-cta">
+  <div class="fc-label">Want More?</div>
+  <h3 class="fc-h">This is just the first resource.</h3>
+  <p class="fc-p">Industry OS founding members get every new education resource free as it drops — plus the full platform, AI release strategy tools, and direct access to the founder. $49/month locked forever.</p>
+  <a class="fc-btn" href="https://buy.stripe.com/6oU3cv5pB3jG1qL16P5Ne00" target="_blank">Become a Founding Member →</a>
+</div>
+```
+
+  </div>
+</main>
+
+<footer>
+  <div class="foot-logo">◈ Industry OS</div>
+  <div class="foot-copy">© 2025 Industry OS · Built for Independent Artists</div>
+</footer>
+
+</body>
+</html>
